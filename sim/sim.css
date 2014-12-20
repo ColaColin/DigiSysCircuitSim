@@ -1,0 +1,81 @@
+.redback {
+	background-color: #f00;
+}
+.whiteback {
+	background-color: white;
+}
+.hinttext {
+	color: orange;
+}
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+.build_element_img {
+	width: 100px;
+	height: 70px;
+}
+#buildbar {
+	background-color: white; 
+	z-index: 19999;
+	border-style: solid;
+	border-color: black;
+}
+
+.highlight-mask {
+    background: transparent url('img/transparent.png') repeat 0 0;
+    display: none;
+    position: absolute;
+}
+.highlight-drag {
+    background-color: transparent;
+    border: dashed #ff3333 3px;
+    position: absolute;
+    display: none;
+    z-index: 91892819;
+}
+
+.selectedGate {
+	border: solid #ff3333 2px;
+}
+.connectSourceGate {
+	border: solid blue 2px;
+}
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.helpbutton {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+}
+
+.helpbutton:hover {
+  cursor: pointer;
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}

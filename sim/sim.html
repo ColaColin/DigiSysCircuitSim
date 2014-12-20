@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Schaltungssimulator</title>
+<link href="sim.css" rel="stylesheet" type="text/css" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/eggplant/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
+<script type="text/javascript" src="setImmediate.js"></script>
+<script type="text/javascript" src="http://mbest.github.io/knockout-deferred-updates/knockout-deferred-updates.min.js"></script>
+<script src="selection.js"></script>
+<script src="arrowdraw.js"></script>
+<script src="sim.js"></script>
+</head>
+<body style="width: 100%" class="noselect">
+	<div title="Help & Config" id="helpdialog">
+		Click an element in the list to create a new one. You can drag elements around, you can make a rubber selection on them if you hold shift while doing that you will add to the current selection, else you will replace the current selection. 
+		You can cut/copy/paste selected elements usint ctrl+x/c/v. Select
+		elements to move them in groups. To delete selected elements press delete. To connect gates ctrl click the source (source will be marked blue) and then click the target. Note that 
+		most gates have one upper and one lower input click the upper or the lower region to select between them. 
+			<span data-bind="visible: hasPreload">This page only shows this specific circuit and does not store any changes. <a
+			href="http://nanodesu.info/stuff/DigiSys/sim/sim.html">HERE</a> can you find a version that stores all changes you do in the browser locally.
+		</span>
+	<div>
+	<hr/>
+		Simulation delay per gate in ms (integer!). <input data-bind="value: switchTime"></input>
+	</div>
+		
+	</div>
+
+	<div>
+		<canvas id="drawpane" style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+		<div data-bind="click: showHelp" style="position: fixed; left: 10px" class="helpbutton">Help & Config</div>
+		<div id="buildbar" data-bind="foreach: buildbar" style="position: fixed; top: 20px;">
+			<div class="build_element" data-bind="click: $parent.add">
+				<img data-bind="attr: {src: 'img/'+$data+'.png'}" class="build_element_img"></img>
+			</div>
+		</div>
+
+		<div id="gates" data-bind="foreach: gateSockets">
+		
+			<!-- ko if: $data.gate.name() === 'notes' -->
+				<div style="background-color:#2E51FF; width: 200px; height: 75px;" data-bind="css: {selectedGate: $data.selected}, style: {top: $data.y()+'px', left: $data.x()+'px'}, draggableGate: $data" class="notes element">
+					<center><textarea data-bind="value: $data.text" style="width: 185px; height: 50px; resize: none; top: 10px; left: 10x; position: relative;"></textarea></center>
+				</div>
+			<!-- /ko -->
+			
+			<!-- ko ifnot: $data.gate.name() === 'notes' -->
+				<div class="gate_element"
+					data-bind="css: {selectedGate: $data.selected, connectSourceGate: $parent.connecting() === $data}, click: clickHandler, style: {width: $data.width()+'px', height: $data.height()+'px', top: $data.y()+'px', left: $data.x()+'px'}, draggableGate: $data"
+					style="position: absolute">
+					<img data-bind="attr: {src: 'img/'+$data.image()+'.png', width: $data.width(), height: $data.height()}" class="gate_element_img"></img>
+					<!-- ko foreach: states -->
+					<span
+						class="hinttext" data-bind="css: {redback: $data.showChanged}, text: $data.value, style: {top: $data.offsetY, left: $data.offsetX}"
+						style="width: 20px; height: 20px; position: absolute; z-index: 1000; pointer-events: none;"></span>
+					<!-- /ko -->
+				</div>
+			<!-- /ko -->
+		</div>
+	</div>
+</body>
+</html>
