@@ -10,6 +10,8 @@
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
 <script type="text/javascript" src="setImmediate.js"></script>
 <script type="text/javascript" src="http://mbest.github.io/knockout-deferred-updates/knockout-deferred-updates.min.js"></script>
+<script src="blob.js"></script>
+<script type="text/javascript" src="filesaver.js"></script>
 <script src="selection.js"></script>
 <script src="arrowdraw.js"></script>
 <script src="sim.js"></script>
@@ -40,7 +42,13 @@
 				<img data-bind="attr: {src: 'img/'+$data+'.png'}" class="build_element_img"></img>
 			</div>
 		</div>
-
+		
+		<div style="position: fixed; right: 0px">
+			<img data-bind="click: editcopy" src="img/copy.png" width="64" height="64"/>
+			<img data-bind="click: importFromFile" src="img/load.png" width="64" height="64"/>
+			<img data-bind="click: exportToFile" src="img/save.png" width="64" height="64"/>
+		</div>
+		
 		<div id="gates" data-bind="foreach: gateSockets">
 		
 			<!-- ko if: $data.gate.name() === 'notes' -->
