@@ -33,7 +33,13 @@
 	</div>
 		
 	</div>
-
+	
+	<div title="Edit Clipboard" id="clipboardlg">
+		Edit this json and click OK to parse it
+		<center><textarea data-bind="value: editClipText" style="width: 600px;height: 300px;"></textarea></center>
+		<div style="cursor: pointer; text-decoration: underline;" data-bind="click: parseNewClipboard">OK</div>
+	</div>
+	
 	<div>
 		<canvas id="drawpane" style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
 		<div data-bind="click: showHelp" style="position: fixed; left: 10px" class="helpbutton">Help & Config</div>
@@ -42,13 +48,12 @@
 				<img data-bind="attr: {src: 'img/'+$data+'.png'}" class="build_element_img"></img>
 			</div>
 		</div>
-		
 		<div style="position: fixed; right: 0px">
-			<img data-bind="click: editcopy" src="img/copy.png" width="64" height="64"/>
-			<img data-bind="click: importFromFile" src="img/load.png" width="64" height="64"/>
-			<img data-bind="click: exportToFile" src="img/save.png" width="64" height="64"/>
+			<img title="Edit clipboard" data-bind="click: editcopy" src="img/copy.png" width="64" height="64"/>
+			<img title="Import" data-bind="click: importFromFile" src="img/load.png" width="64" height="64"/>
+			<img title="Export" data-bind="click: exportToFile" src="img/save.png" width="64" height="64"/>
 		</div>
-		
+		<input data-bind="event: { change: importFileChanged }" type="file" id="importFile" style="visibility: hidden; width: 0px; height: 0px"/>
 		<div id="gates" data-bind="foreach: gateSockets">
 		
 			<!-- ko if: $data.gate.name() === 'notes' -->

@@ -633,12 +633,41 @@ function SimModel() {
 		}
 	};
 	
+	self.editClipText = ko.observable("");
+	
 	self.editcopy = function() {
-		console.log("implement edit!");
+		self.editClipText(JSON.stringify(self.copied()));
+		$('#clipboardlg').dialog("open");
+	};
+	
+	self.parseNewClipboard = function() {
+		self.copied(JSON.parse(self.editClipText()));
+		$('#clipboardlg').dialog("close");
+	};
+	
+	$('#clipboardlg').dialog({
+		autoOpen : false,
+		minWidth : 650
+	});
+	
+	self.importFileChanged = function(m, evt) {
+		var file = evt.target.files[0];
+		if (file) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var state = JSON.parse(e.target.result);
+				self.gateSockets([]);
+				self.switchTime(state.switchTime);
+				injectGates(state.sockets);
+			};
+			reader.readAsText(file);
+		}
 	};
 	
 	self.importFromFile = function() {
-		console.log("implement import");
+		if (confirm("Importing a file will delete all currently opened circuits, proceed?")) {
+			$("#importFile").click();
+		}
 	};
 	
 	self.exportToFile = function() {
