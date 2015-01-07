@@ -43,13 +43,13 @@
 	
 	<div>
 		<canvas id="drawpane" style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
-		<div data-bind="click: showHelp" style="position: fixed; left: 10px" class="helpbutton">Help & Config</div>
+		<div data-bind="click: showHelp" style="position: fixed; left: 10px; z-index: 1000;" class="helpbutton">Help & Config</div>
 		<div id="buildbar" data-bind="foreach: buildbar" style="position: fixed; top: 20px;">
 			<div class="build_element" data-bind="click: $parent.add">
 				<img data-bind="attr: {src: 'img/'+$data+'.png'}" class="build_element_img"></img>
 			</div>
 		</div>
-		<div style="position: fixed; right: 0px">
+		<div style="position: fixed; right: 0px; z-index: 1000;">
 			<img title="Edit clipboard" data-bind="click: editcopy" src="img/copy.png" width="64" height="64"/>
 			<img title="Import" data-bind="click: importFromFile" src="img/load.png" width="64" height="64"/>
 			<img title="Export" data-bind="click: exportToFile" src="img/save.png" width="64" height="64"/>
