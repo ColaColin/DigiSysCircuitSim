@@ -193,6 +193,8 @@ function SimModel() {
 	self.gateSockets = ko.observableArray([]);
 	self.switchTime = ko.observable(75);
 	
+	self.showDetails = ko.observable(true);
+	
 	self.hasPreload = ko.observable(preload !== undefined);
 	
 	self.connecting = ko.observable();
@@ -546,7 +548,8 @@ function SimModel() {
 //		var dt = new Date().getTime();
 		var state = {
 			sockets: packageGates(),
-			switchTime: self.switchTime()
+			switchTime: self.switchTime(),
+			showDetails: self.showDetails()
 		};
 //		console.log("stored within "+(new Date().getTime() - dt)+" ms");
 		return state;
@@ -558,6 +561,8 @@ function SimModel() {
 		}
 		localStorage['state'] = JSON.stringify(getCurrentStateCopy());
 	};
+	
+	self.showDetails.subscribe(self.storeState);
 	
 	self.switchTime.subscribe(function() {
 		self.storeState();
@@ -719,6 +724,12 @@ function SimModel() {
 			state = JSON.parse(state);
 			
 			self.switchTime(state.switchTime);
+			
+			if (state.showDetails === undefined) {
+				state.showDetails = true;
+			}
+			
+			self.showDetails(state.showDetails);
 			
 			injectGates(state.sockets);
 

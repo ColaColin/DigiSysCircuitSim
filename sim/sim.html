@@ -28,6 +28,7 @@
 	<div>
 	<hr/>
 		Simulation delay per gate in ms (integer!). <input data-bind="value: switchTime"></input>
+		<br/>Show simulation details (costs considerable CPU power for big circuits): <input type="checkbox" data-bind="checked: showDetails"/>
 		<hr/>
 		<a href="https://github.com/ColaColin/DigiSysCircuitSim">Code@github</a>
 	</div>
@@ -67,10 +68,12 @@
 					data-bind="css: {selectedGate: $data.selected, connectSourceGate: $parent.connecting() === $data}, click: clickHandler, style: {width: $data.width()+'px', height: $data.height()+'px', top: $data.y()+'px', left: $data.x()+'px'}, draggableGate: $data"
 					style="position: absolute">
 					<img data-bind="attr: {src: 'img/'+$data.image()+'.png', width: $data.width(), height: $data.height()}" class="gate_element_img"></img>
+					<!-- ko if: $parent.showDetails -->
 					<!-- ko foreach: states -->
 					<span
 						class="hinttext" data-bind="css: {redback: $data.showChanged}, text: $data.value, style: {top: $data.offsetY, left: $data.offsetX}"
 						style="width: 20px; height: 20px; position: absolute; z-index: 1000; pointer-events: none;"></span>
+					<!-- /ko -->
 					<!-- /ko -->
 				</div>
 			<!-- /ko -->
