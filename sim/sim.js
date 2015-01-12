@@ -460,6 +460,8 @@ function SimModel() {
 			break;
 		case "notes":
 			n = new GateSocket(newNotesGate());
+			n.width(200);
+			n.height(75);
 			break;
 		default:
 			console.log("unknown key "+key+": Cannot add socket for that!");

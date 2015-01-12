@@ -58,8 +58,8 @@
 		<div id="gates" data-bind="foreach: gateSockets">
 		
 			<!-- ko if: $data.gate.name() === 'notes' -->
-				<div style="background-color:#2E51FF; width: 200px; height: 75px;" data-bind="css: {selectedGate: $data.selected}, style: {top: $data.y()+'px', left: $data.x()+'px'}, draggableGate: $data" class="notes element">
-					<center><textarea data-bind="value: $data.text" style="width: 185px; height: 50px; resize: none; top: 10px; left: 10x; position: relative;"></textarea></center>
+				<div style="background-color:#2E51FF;" data-bind="css: {selectedGate: $data.selected}, style: {width: $data.width()+'px', height: $data.height()+'px', top: $data.y()+'px', left: $data.x()+'px'}, draggableGate: $data" class="notes element">
+					<center><textarea data-bind="value: $data.text, style: {width: ($data.width() * 175/200)+'px', height: ($data.height() * 2/3)+'px', top: ($data.height() * 10/75)+'px'}" style="resize: none; position: relative;"></textarea></center>
 				</div>
 			<!-- /ko -->
 			
