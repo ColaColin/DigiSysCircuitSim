@@ -409,7 +409,8 @@ function SimModel() {
 							self.connecting().gate.linkOutputToA(clicked.gate);
 							self.connecting(undefined);
 						} else if (clicked.gate.name() !== "0" && clicked.gate.name() !== "1") {
-							var aElseB = event.offsetY < clicked.height()/2;
+							var y = event.offsetY || event.originalEvent.layerY;
+							var aElseB = y < clicked.height()/2;
 							
 							if (aElseB) {
 								self.connecting().gate.linkOutputToA(clicked.gate);
